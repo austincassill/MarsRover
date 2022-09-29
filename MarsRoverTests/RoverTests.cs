@@ -44,7 +44,7 @@ namespace MarsRoverTests
         [TestCase("3 B N", "Latitude is invalid. Must be a positive integer.", true)]
         [TestCase("3 -5 N", "Latitude is invalid. Must be a positive integer.", true)]
         [TestCase("3 5 C", "Direction must be N (north), S (south), E (east), or W (west).", true)]
-        [TestCase("3 5 N", "Rover location is outside the bounds of the plateau.", false)]
+        [TestCase("3 5 N", "Rover location is outside the bounds of the plateau (0, 0).", false)]
         public void DeploymentValidation_Returns_Error(string input, string expected, bool validCoordinates)
         {
             _console.ReadLine().Returns(input, "3 5 N");
@@ -68,7 +68,7 @@ namespace MarsRoverTests
             _console.Received(1).WriteLine("Longitude is invalid. Must be a positive integer.");
             _console.Received(1).WriteLine("Latitude is invalid. Must be a positive integer.");
             _console.Received(1).WriteLine("Direction must be N (north), S (south), E (east), or W (west).");
-            _console.Received(1).WriteLine("Rover location is outside the bounds of the plateau.");
+            _console.Received(1).WriteLine("Rover location is outside the bounds of the plateau (0, 0).");
 
             Assert.That(_rover.Longitude, Is.EqualTo(3));
             Assert.That(_rover.Latitude, Is.EqualTo(5));

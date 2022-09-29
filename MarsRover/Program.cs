@@ -7,9 +7,8 @@ namespace MarsRover
     {
         public static void Main(string[] args)
         {
-            // TODO: create MissionControl class and launch here
-
-
+            var missionControl = new MissionControl();
+            missionControl.Launch();
         }
     }
 }

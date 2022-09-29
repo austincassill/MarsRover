@@ -8,6 +8,9 @@ namespace MarsRover.Interfaces
 {
     public interface IPlateau
     {
+        int Length { get; }
+        int Width { get; }
+        void Build();
         bool ValidCoordinates(int latitude, int longitude);
     }
 }

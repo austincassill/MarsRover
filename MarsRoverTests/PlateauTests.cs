@@ -6,7 +6,7 @@ using NUnit.Framework;
 namespace MarsRoverTests
 {
     [TestFixture]
-    public class Tests
+    public class PlateauTests
     {
         private IConsoleWrapper _console;
         private Plateau _plateau;

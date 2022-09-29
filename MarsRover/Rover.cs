@@ -55,7 +55,7 @@ namespace MarsRover
 
             if (!_plateau.ValidCoordinates(longitude, latitude))
             {
-                _console.WriteLine("Rover location is outside the bounds of the plateau.");
+                _console.WriteLine($"Rover location is outside the bounds of the plateau ({_plateau.Length}, {_plateau.Width}).");
                 valid = false;
             }
 

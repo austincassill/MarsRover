@@ -47,6 +47,7 @@
     <Compile Include="Interfaces\IConsoleWrapper.cs" />
     <Compile Include="Interfaces\IPlateau.cs" />
     <Compile Include="Interfaces\IRover.cs" />
+    <Compile Include="MissionControl.cs" />
     <Compile Include="Plateau.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
