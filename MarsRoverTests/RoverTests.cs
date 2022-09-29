@@ -21,7 +21,7 @@ namespace MarsRoverTests
         }
 
         [Test]
-        public void DeploymentValidation_Returns_No_Errors_With_Good_Input()
+        public void DeploymentValidation_Returns_No_Errors()
         {
             _console.ReadLine().Returns("3 5 N", "q");
             _plateau.ValidCoordinates(Arg.Any<int>(), Arg.Any<int>()).Returns(true);
@@ -43,7 +43,7 @@ namespace MarsRoverTests
         [TestCase("3 B N", "Latitude is invalid. Must be an integer.", true)]
         [TestCase("3 5 C", "Direction must be N (north), S (south), E (east), or W (west).", true)]
         [TestCase("3 5 N", "Rover location is outside the bounds of the plateau.", false)]
-        public void DeploymentValidation_Returns_Error_With_Bad_Input(string input, string expected, bool validCoordinates)
+        public void DeploymentValidation_Returns_Error(string input, string expected, bool validCoordinates)
         {
             _console.ReadLine().Returns(input, "q");
             _plateau.ValidCoordinates(Arg.Any<int>(), Arg.Any<int>()).Returns(validCoordinates);
@@ -55,7 +55,7 @@ namespace MarsRoverTests
         }
 
         [Test]
-        public void DeploymentValidation_Returns_AllErrors_With_Very_Bad_Input_Followed_By_Good_Input()
+        public void DeploymentValidation_Returns_AllErrors()
         {
             _console.ReadLine().Returns("A B C", "3 5 N");
             _plateau.ValidCoordinates(Arg.Any<int>(), Arg.Any<int>()).Returns(false, true);

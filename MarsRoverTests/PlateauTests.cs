@@ -33,6 +33,38 @@ namespace MarsRoverTests
             Assert.That(_plateau.Width, Is.EqualTo(7));
         }
 
+        [TestCase("A 7", "Length is invalid. Must be a positive integer.", "Width is invalid. Must be a positive integer.")]
+        [TestCase("-2 7", "Length is invalid. Must be a positive integer.", "Width is invalid. Must be a positive integer.")]
+        [TestCase("5 B", "Width is invalid. Must be a positive integer.","Length is invalid. Must be a positive integer.")]
+        [TestCase("5 -3", "Width is invalid. Must be a positive integer.", "Length is invalid. Must be a positive integer." )]
+        public void BuildPlateau_Returns_Error(string badInput, string expected, string notExpected)
+        {
+            _console.ReadLine().Returns(badInput, "5 7");
+
+            _plateau.BuildPlateau();
+
+            _console.Received(2).WriteLine("Please enter the length and width of the plateau. (f.e. 10 12)");
+            _console.Received(1).WriteLine(expected);
+            _console.DidNotReceive().WriteLine(notExpected);
+        }
+
+        [TestCase("A B")]
+        [TestCase("-2 -3")]
+        public void BuildPlateau_Returns_AllErrors(string badInput)
+        {
+            _console.ReadLine().Returns(badInput, "5 7");
+
+            _plateau.BuildPlateau();
+
+            _console.Received(2).WriteLine("Please enter the length and width of the plateau. (f.e. 10 12)");
+            _console.Received(1).WriteLine("Length is invalid. Must be a positive integer.");
+            _console.Received(1).WriteLine("Width is invalid. Must be a positive integer.");
+        }
+
+
+
+
+
         [TestCase(3, 4, true)]
         [TestCase(5, 4, true)]
         [TestCase(3, 7, true)]

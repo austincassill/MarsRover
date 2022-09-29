@@ -28,7 +28,7 @@ namespace MarsRover
         private bool ValidPlateau(string[] input)
         {
             var valid = true;
-            if (!int.TryParse(input[0], out var length) && length <= 0)
+            if (!int.TryParse(input[0], out var length) || length <= 0)
             {
                 _console.WriteLine("Length is invalid. Must be a positive integer.");
                 valid = false;
@@ -37,9 +37,9 @@ namespace MarsRover
             {
                 Length = length;
             }
-            if (!int.TryParse(input[1], out var width) && width <= 0)
+            if (!int.TryParse(input[1], out var width) || width <= 0)
             {
-                _console.WriteLine("Length is invalid. Must be a positive integer.");
+                _console.WriteLine("Width is invalid. Must be a positive integer.");
                 valid = false;
             }
             else
