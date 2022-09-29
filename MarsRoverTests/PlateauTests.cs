@@ -61,10 +61,6 @@ namespace MarsRoverTests
             _console.Received(1).WriteLine("Width is invalid. Must be a positive integer.");
         }
 
-
-
-
-
         [TestCase(3, 4, true)]
         [TestCase(5, 4, true)]
         [TestCase(3, 7, true)]
