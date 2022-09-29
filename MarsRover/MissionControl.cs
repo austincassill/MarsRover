@@ -19,16 +19,11 @@ namespace MarsRover
             _rover = new Rover(_plateau, console);
         }
 
-        public MissionControl(IPlateau plateau, IRover rover)
-        {
-            _plateau = plateau;
-            _rover = rover;
-        }
-
         public void Launch()
         {
             _plateau.Build();
             _rover.Deploy();
+            _rover.Execute();
         }
     }
 }

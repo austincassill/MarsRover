@@ -9,5 +9,6 @@ namespace MarsRover.Interfaces
     public interface IRover
     {
         void Deploy();
+        void Execute();
     }
 }
