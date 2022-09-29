@@ -54,5 +54,24 @@ namespace MarsRoverTests
             _console.Received().WriteLine("Please enter starting longitude, latitude, and direction. (f.e. 3 4 N)");
             _console.Received().WriteLine(expected);
         }
+
+        [Test]
+        public void DeploymentValidation_Returns_AllErrors_With_Very_Bad_Input_Followed_By_Good_Input()
+        {
+            _console.ReadLine().Returns("A B C", "3 5 N");
+            _plateau.ValidCoordinates(Arg.Any<int>(), Arg.Any<int>()).Returns(false, true);
+
+            _rover.DeploymentValidation();
+
+            _console.Received(2).WriteLine("Please enter starting longitude, latitude, and direction. (f.e. 3 4 N)");
+            _console.Received(1).WriteLine("Longitude is invalid. Must be an integer.");
+            _console.Received(1).WriteLine("Latitude is invalid. Must be an integer.");
+            _console.Received(1).WriteLine("Direction must be N (north), S (south), E (east), or W (west).");
+            _console.Received(1).WriteLine("Rover location is outside the bounds of the plateau.");
+
+            Assert.That(_rover.Longitude, Is.EqualTo(3));
+            Assert.That(_rover.Latitude, Is.EqualTo(5));
+            Assert.That(_rover.Direction, Is.EqualTo("N"));
+        }
     }
 }

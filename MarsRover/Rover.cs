@@ -22,6 +22,7 @@ namespace MarsRover
         {
             while (true)
             {
+                var error = false;
                 _console.WriteLine("Please enter starting longitude, latitude, and direction. (f.e. 3 4 N)");
                 var input = _console.ReadLine().Split(' ');
 
@@ -33,26 +34,29 @@ namespace MarsRover
                 if (!int.TryParse(input[0], out var longitude))
                 {
                     _console.WriteLine("Longitude is invalid. Must be an integer.");
-                    continue;
+                    error = true;
                 }
 
                 if (!int.TryParse(input[1], out var latitude))
                 {
                     _console.WriteLine("Latitude is invalid. Must be an integer.");
-                    continue;
+                    error = true;
                 }
 
                 if (!ValidDirections.Contains(input[2]))
                 {
                     _console.WriteLine("Direction must be N (north), S (south), E (east), or W (west).");
-                    continue;
+                    error = true;
                 }
                 
                 if (!_plateau.ValidCoordinates(longitude, latitude))
                 {
                     _console.WriteLine("Rover location is outside the bounds of the plateau.");
-                    continue;
+                    error = true;
                 }
+
+                if (error)
+                    continue;
 
                 Longitude = longitude;
                 Latitude = latitude;
