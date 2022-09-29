@@ -1,4 +1,6 @@
 ﻿using System.Linq;
+using System.Runtime.InteropServices;
+using System.Security.Cryptography.X509Certificates;
 using MarsRover.Interfaces;
 
 namespace MarsRover
@@ -18,52 +20,49 @@ namespace MarsRover
             _console = console;
         }
 
-        public void DeploymentValidation()
+        public void Deploy()
         {
-            while (true)
+            string[] input;
+            do
             {
-                var error = false;
                 _console.WriteLine("Please enter starting longitude, latitude, and direction. (f.e. 3 4 N)");
-                var input = _console.ReadLine().Split(' ');
+                input = _console.ReadLine().Split(' ');
+            } while (!ValidDeployment(input));
+            
+        }
 
-                if (input[0] == "q")
-                {
-                    break;
-                }
+        private bool ValidDeployment(string[] input)
+        {
+            var valid = true;
 
-                // todo: add a check for negative number
-                if (!int.TryParse(input[0], out var longitude))
-                {
-                    _console.WriteLine("Longitude is invalid. Must be a positive integer.");
-                    error = true;
-                }
-
-                if (!int.TryParse(input[1], out var latitude))
-                {
-                    _console.WriteLine("Latitude is invalid. Must be a positive integer.");
-                    error = true;
-                }
-
-                if (!ValidDirections.Contains(input[2].ToUpper()))
-                {
-                    _console.WriteLine("Direction must be N (north), S (south), E (east), or W (west).");
-                    error = true;
-                }
-                
-                if (!_plateau.ValidCoordinates(longitude, latitude))
-                {
-                    _console.WriteLine("Rover location is outside the bounds of the plateau.");
-                    error = true;
-                }
-
-                if (error)
-                    continue;
-
-                Longitude = longitude;
-                Latitude = latitude;
-                Direction = input[2];
-                break;
+            if (!int.TryParse(input[0], out var longitude) || longitude <= 0)
+            {
+                _console.WriteLine("Longitude is invalid. Must be a positive integer.");
+                valid = false;
             }
+
+            if (!int.TryParse(input[1], out var latitude) || latitude <= 0)
+            {
+                _console.WriteLine("Latitude is invalid. Must be a positive integer.");
+                valid = false;
+            }
+
+            if (!ValidDirections.Contains(input[2].ToUpper()))
+            {
+                _console.WriteLine("Direction must be N (north), S (south), E (east), or W (west).");
+                valid = false;
+            }
+
+            if (!_plateau.ValidCoordinates(longitude, latitude))
+            {
+                _console.WriteLine("Rover location is outside the bounds of the plateau.");
+                valid = false;
+            }
+
+            Longitude = longitude;
+            Latitude = latitude;
+            Direction = input[2];
+            return valid;
         }
     }
 }

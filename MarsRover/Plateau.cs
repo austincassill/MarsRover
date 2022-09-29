@@ -14,7 +14,7 @@ namespace MarsRover
             _console = console;
         }
 
-        public void BuildPlateau()
+        public void Build()
         {
             string[] input;
             do

@@ -23,7 +23,7 @@ namespace MarsRoverTests
         {
             _console.ReadLine().Returns("5 7");
 
-            _plateau.BuildPlateau();
+            _plateau.Build();
 
             _console.Received(1).WriteLine("Please enter the length and width of the plateau. (f.e. 10 12)");
             _console.DidNotReceive().WriteLine("Length is invalid. Must be a positive integer.");
@@ -41,7 +41,7 @@ namespace MarsRoverTests
         {
             _console.ReadLine().Returns(badInput, "5 7");
 
-            _plateau.BuildPlateau();
+            _plateau.Build();
 
             _console.Received(2).WriteLine("Please enter the length and width of the plateau. (f.e. 10 12)");
             _console.Received(1).WriteLine(expected);
@@ -54,7 +54,7 @@ namespace MarsRoverTests
         {
             _console.ReadLine().Returns(badInput, "5 7");
 
-            _plateau.BuildPlateau();
+            _plateau.Build();
 
             _console.Received(2).WriteLine("Please enter the length and width of the plateau. (f.e. 10 12)");
             _console.Received(1).WriteLine("Length is invalid. Must be a positive integer.");
@@ -74,7 +74,7 @@ namespace MarsRoverTests
         public void ValidCoordinates_Validates_Correctly(int longitude, int latitude, bool expected)
         {
             _console.ReadLine().Returns("5 7");
-            _plateau.BuildPlateau();
+            _plateau.Build();
 
             var result = _plateau.ValidCoordinates(longitude, latitude);
 
