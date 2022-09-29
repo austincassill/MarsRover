@@ -31,15 +31,16 @@ namespace MarsRover
                     break;
                 }
 
+                // todo: add a check for negative number
                 if (!int.TryParse(input[0], out var longitude))
                 {
-                    _console.WriteLine("Longitude is invalid. Must be an integer.");
+                    _console.WriteLine("Longitude is invalid. Must be a positive integer.");
                     error = true;
                 }
 
                 if (!int.TryParse(input[1], out var latitude))
                 {
-                    _console.WriteLine("Latitude is invalid. Must be an integer.");
+                    _console.WriteLine("Latitude is invalid. Must be a positive integer.");
                     error = true;
                 }
 

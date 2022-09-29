@@ -1,21 +1,57 @@
 ﻿using MarsRover.Interfaces;
+using System;
 
 namespace MarsRover
 {
     public class Plateau : IPlateau
     {
-        private readonly int _length;
-        private readonly int _width;
+        public int Length { get; private set; }
+        public int Width { get; private set; }
+        private readonly IConsoleWrapper _console;
 
-        public Plateau(int length, int width)
+        public Plateau(IConsoleWrapper console)
         {
-            _length = length;
-            _width = width;
+            _console = console;
+        }
+
+        public void BuildPlateau()
+        {
+            string[] input;
+            do
+            {
+                _console.WriteLine("Please enter the length and width of the plateau. (f.e. 10 12)");
+                input = _console.ReadLine().Split(' ');
+            } while (!ValidPlateau(input));
+
+        }
+
+        public bool ValidPlateau(string[] input)
+        {
+            var valid = true;
+            if (!int.TryParse(input[0], out var length) && length <= 0)
+            {
+                _console.WriteLine("Length is invalid. Must be a positive integer.");
+                valid = false;
+            }
+            else
+            {
+                Length = length;
+            }
+            if (!int.TryParse(input[1], out var width) && width <= 0)
+            {
+                _console.WriteLine("Length is invalid. Must be a positive integer.");
+                valid = false;
+            }
+            else
+            {
+                Width = width;
+            }
+            return valid;
         }
 
         public bool ValidCoordinates(int longitude, int latitude)
         {
-            return _length >= longitude && _width >= latitude;
+            return Length >= longitude && Width >= latitude;
         }
 
 
