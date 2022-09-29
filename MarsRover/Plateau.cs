@@ -25,7 +25,7 @@ namespace MarsRover
 
         }
 
-        public bool ValidPlateau(string[] input)
+        private bool ValidPlateau(string[] input)
         {
             var valid = true;
             if (!int.TryParse(input[0], out var length) && length <= 0)
