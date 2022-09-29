@@ -1,15 +1,19 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using MarsRover.Interfaces;
 
 namespace MarsRover
 {
-    internal class Program
+    public class Program
     {
-        static void Main(string[] args)
+        public static void Main(string[] args)
         {
+            // TODO: reorganize all this into their own classes - maybe the plateau class?
+            Console.WriteLine("Please enter the length and width of the plateau. (f.e. 10 12)");
+            var input = Console.ReadLine().Split(' ');
+            var plateau = new Plateau(int.Parse(input[0]), int.Parse(input[1]));
+            var rover = new Rover(plateau, new ConsoleWrapper());
+            rover.DeploymentValidation();
+
         }
     }
 }

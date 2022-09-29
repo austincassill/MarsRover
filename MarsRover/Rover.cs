@@ -43,7 +43,7 @@ namespace MarsRover
                     error = true;
                 }
 
-                if (!ValidDirections.Contains(input[2]))
+                if (!ValidDirections.Contains(input[2].ToUpper()))
                 {
                     _console.WriteLine("Direction must be N (north), S (south), E (east), or W (west).");
                     error = true;

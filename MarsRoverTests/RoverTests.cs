@@ -1,7 +1,6 @@
 ﻿using MarsRover;
 using MarsRover.Interfaces;
 using NSubstitute;
-using NSubstitute.ReceivedExtensions;
 using NUnit.Framework;
 
 namespace MarsRoverTests

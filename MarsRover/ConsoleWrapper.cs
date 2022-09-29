@@ -1,7 +1,9 @@
 ﻿using System;
+using MarsRover.Interfaces;
+
 namespace MarsRover
 {
-    public class ConsoleWrapper
+    public class ConsoleWrapper : IConsoleWrapper
     {
         public void WriteLine(string input)
         {
